@@ -1,2 +1,2 @@
-# chemicaljs.github.io
+# Website
 Website for Chemical.

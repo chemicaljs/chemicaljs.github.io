@@ -1,0 +1,91 @@
+---
+import "../styles/global.css";
+import Navbar from "@/components/Navbar.astro";
+import Footer from "@/components/Footer.astro";
+import { Text } from "@/components/ui/text";
+import {
+	Breadcrumb,
+	BreadcrumbItem,
+	BreadcrumbLink,
+	BreadcrumbList,
+	BreadcrumbPage,
+	BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+
+interface Props {
+	frontmatter: {
+		title: string;
+	};
+}
+
+const { frontmatter } = Astro.props;
+
+const pageData = await Astro.glob("/src/pages/docs/*.mdx");
+
+const pages = ["get-started", "server", "client", "vite-plugin", "building"]
+
+const docPages = pages.map((page) => {
+    const data = pageData.filter(p => p.url.split("/docs/")[1] == page)[0];
+
+	return {
+		url: data.url,
+		title: data.frontmatter.title,
+		isActive: Astro.url.pathname == data.url,
+	};
+});
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="description"
+			content="Easily create your own web proxy with no experience required."
+		/>
+		<meta name="viewport" content="width=device-width" />
+		<title>{frontmatter.title + " | Chemical"}</title>
+	</head>
+	<body class="min-h-[100vh] flex flex-col px-8">
+		<Navbar />
+		<main class="py-8 flex gap-8">
+			<aside class="sticky top-[89px] left-0 w-40 flex flex-col gap-2">
+				{
+					docPages.map((item) => (
+						<a
+							class={
+								item.isActive ? "text-foreground" : "text-muted-foreground"
+							}
+							href={item.url}
+						>
+							{item.title}
+						</a>
+					))
+				}
+			</aside>
+			<div>
+				<Breadcrumb className="mb-4">
+					<BreadcrumbList>
+						<BreadcrumbItem>
+							<BreadcrumbPage>Docs</BreadcrumbPage>
+						</BreadcrumbItem>
+						<BreadcrumbSeparator />
+						<BreadcrumbItem>
+							<BreadcrumbPage>{frontmatter.title}</BreadcrumbPage>
+						</BreadcrumbItem>
+					</BreadcrumbList>
+				</Breadcrumb>
+				<div class="prose dark:prose-invert">
+					<slot />
+				</div>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style is:global>
+	a:hover {
+		text-decoration: underline;
+	}
+</style>
