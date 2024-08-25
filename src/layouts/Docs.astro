@@ -2,7 +2,6 @@
 import "../styles/global.css";
 import Navbar from "@/components/Navbar.astro";
 import Footer from "@/components/Footer.astro";
-import { Text } from "@/components/ui/text";
 import {
 	Breadcrumb,
 	BreadcrumbItem,
@@ -20,19 +19,41 @@ interface Props {
 
 const { frontmatter } = Astro.props;
 
-const pageData = await Astro.glob("/src/pages/docs/*.mdx");
+const pageData = await Astro.glob("/src/pages/docs/**/*.mdx");
 
-const pages = ["get-started", "server", "client", "vite-plugin", "building"]
+const folders = [
+	{
+		title: "Introduction",
+		dir: "introduction",
+		pages: ["get-started", "faq"],
+	},
+	{
+		title: "Setup",
+		dir: "setup",
+		pages: ["server", "client", "vite-plugin", "building"],
+	},
+];
 
-const docPages = pages.map((page) => {
-    const data = pageData.filter(p => p.url.split("/docs/")[1] == page)[0];
+const docPages = folders.map((folder) => {
+    const newPages = folder.pages.map((page) => {
+		const data = pageData.filter((p) => p.url == "/docs/" + folder.dir + "/" + page)[0];
+
+		return {
+			url: data.url,
+			title: data.frontmatter.title,
+			isActive: Astro.url.pathname == data.url,
+		};
+	});
 
 	return {
-		url: data.url,
-		title: data.frontmatter.title,
-		isActive: Astro.url.pathname == data.url,
-	};
+        ...folder,
+        pages: newPages
+    }
 });
+
+const currentFolder = docPages.filter((folder) => {
+    return folder.dir == Astro.url.pathname.split("/docs/")[1].split("/")[0];
+})[0];
 ---
 
 <!doctype html>
@@ -51,15 +72,20 @@ const docPages = pages.map((page) => {
 		<main class="py-8 flex gap-8">
 			<aside class="sticky top-[89px] left-0 w-40 flex flex-col gap-2">
 				{
-					docPages.map((item) => (
+					docPages.map((folder) => (
+                        <h4 class="font-bold">{folder.title}</h4>
+                        <div class="flex flex-col gap-2 px-2">
+                            {folder.pages.map((page) => (
 						<a
 							class={
-								item.isActive ? "text-foreground" : "text-muted-foreground"
+								page.isActive ? " text-foreground" : " text-muted-foreground"
 							}
-							href={item.url}
+							href={page.url}
 						>
-							{item.title}
+							{page.title}
 						</a>
+                        ))}
+                        </div>
 					))
 				}
 			</aside>
@@ -67,7 +93,11 @@ const docPages = pages.map((page) => {
 				<Breadcrumb className="mb-4">
 					<BreadcrumbList>
 						<BreadcrumbItem>
-							<BreadcrumbPage>Docs</BreadcrumbPage>
+							<BreadcrumbLink href="/docs/introduction/get-started">Docs</BreadcrumbLink>
+						</BreadcrumbItem>
+						<BreadcrumbSeparator />
+                        <BreadcrumbItem>
+							<BreadcrumbLink href={currentFolder.pages[0].url}>{currentFolder.title}</BreadcrumbLink>
 						</BreadcrumbItem>
 						<BreadcrumbSeparator />
 						<BreadcrumbItem>
