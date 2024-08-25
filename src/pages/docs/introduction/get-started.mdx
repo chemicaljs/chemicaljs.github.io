@@ -1,0 +1,17 @@
+---
+title: "Get Started"
+layout: "../../../layouts/Docs.astro"
+---
+
+# Get Started
+
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Lightbulb } from "lucide-react";
+
+<Alert className="not-prose">
+  <Lightbulb className="h-4 w-4" />
+  <AlertTitle>Note</AlertTitle>
+  <AlertDescription>
+    Just want to make a basic proxy site? Check out <a className="underline" href="/docs/examples/basic">basic example.</a>
+  </AlertDescription>
+</Alert>
