@@ -3,24 +3,36 @@ import { Text } from "@/components/ui/text";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { GithubIcon } from "astro-feather";
+import { MobileNav } from "./MobileNav.jsx";
 ---
 
-<nav class="sticky top-0 right-0 left-0 backdrop-blur-md flex justify-between items-center py-4 border-b border-border">
+<nav
+	class="sticky h-[73px] top-0 right-0 left-0 backdrop-blur-md flex justify-between items-center py-4 border-b border-border mx-8"
+>
 	<div class="flex justify-center items-center gap-2">
 		<Text element="h3" as="h3" className="font-bold">Chemical</Text>
 		<Badge variant="outline">v1.6.6</Badge>
 	</div>
-	<div class="flex justify-center items-center gap-8">
+	<div class="hidden md:flex justify-center items-center gap-8">
 		<a href="/">Home</a>
 		<a href="/docs/introduction/get-started">Documentation</a>
-        <a href="/showcase">Showcase</a>
+		<a href="/showcase">Showcase</a>
 		<a href="/credits">Credits</a>
 	</div>
-	<div class="w-[158.667px] flex justify-end items-center gap-4">
+	<div class="w-[158.667px] hidden md:flex justify-end items-center gap-4">
 		<a
 			class={buttonVariants({ variant: "outline", size: "icon" })}
 			href="https://github.com/chemicaljs/chemical"
 			><GithubIcon size={16} />
 		</a>
 	</div>
+	<div class="flex md:hidden">
+		<MobileNav client:load />
+	</div>
 </nav>
+
+<style is:global>
+	button[class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary"] {
+    box-shadow: none !important;
+  }
+</style>

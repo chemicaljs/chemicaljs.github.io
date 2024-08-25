@@ -1,0 +1,101 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Text } from "@/components/ui/text";
+import {
+	Card,
+	CardHeader,
+	CardTitle,
+	CardDescription,
+	CardContent,
+} from "@/components/ui/card";
+import { buttonVariants } from "@/components/ui/button";
+import { GithubIcon, GlobeIcon } from "astro-feather";
+---
+
+<Layout title="Showcase | Chemical">
+	<div class="flex flex-col gap-12 py-12">
+		<div class="flex flex-col items-center">
+			<Text element="h1" as="h1">Showcase</Text>
+			<Text element="p" as="p"
+				>Check out these amazing projects that use Chemical.</Text
+			>
+		</div>
+		<div class="grid grid-cols-2 gap-4 px-8">
+			<Card>
+				<CardHeader>
+					<img src="/showcase/nano.png" class="rounded-md mb-4 aspect-[calc(1366/681)_/_1] border border-border" />
+					<CardTitle>nano.</CardTitle>
+					<CardDescription>
+						A minimalist web proxy built to be simple yet powerful.</CardDescription
+					>
+				</CardHeader>
+				<CardContent className="flex gap-2">
+					<a
+						href="https://nano-proxy.github.io/"
+						class={buttonVariants({ variant: "outline", size: "icon" })}
+					>
+						<GlobeIcon size={16} />
+					</a>
+					<a
+						href="https://github.com/titaniumnetwork-dev/nano"
+						class={buttonVariants({ variant: "outline", size: "icon" })}
+					>
+						<GithubIcon size={16} />
+					</a>
+				</CardContent>
+			</Card>
+			<Card>
+				<CardHeader>
+					<img src="/showcase/metallic.png" class="rounded-md mb-4 aspect-[calc(1366/681)_/_1] border border-border" />
+					<CardTitle>Metallic</CardTitle>
+					<CardDescription>
+						A powerful web proxy built for speed and customization.</CardDescription
+					>
+				</CardHeader>
+				<CardContent className="flex gap-2">
+					<a
+						href="https://metallic.eu.org/"
+						class={buttonVariants({ variant: "outline", size: "icon" })}
+					>
+						<GlobeIcon size={16} />
+					</a>
+					<a
+						href="https://github.com/cognetwork-dev/Metallic"
+						class={buttonVariants({ variant: "outline", size: "icon" })}
+					>
+						<GithubIcon size={16} />
+					</a>
+				</CardContent>
+			</Card>
+			<Card>
+				<CardHeader>
+					<img src="/showcase/oxide.png" class="rounded-md mb-4 aspect-[calc(1366/681)_/_1] border border-border" />
+					<CardTitle>Oxide</CardTitle>
+					<CardDescription>
+						No tracking, no useless stuff, just a dead simple proxy.</CardDescription
+					>
+				</CardHeader>
+				<CardContent className="flex gap-2">
+					<a
+						href="https://oxide.3kh0.net/"
+						class={buttonVariants({ variant: "outline", size: "icon" })}
+					>
+						<GlobeIcon size={16} />
+					</a>
+					<a
+						href="https://github.com/3kh0/Oxide"
+						class={buttonVariants({ variant: "outline", size: "icon" })}
+					>
+						<GithubIcon size={16} />
+					</a>
+				</CardContent>
+			</Card>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	a:hover {
+		text-decoration: none;
+	}
+</style>

@@ -16,7 +16,7 @@ export default defineConfig({
 	],
 	redirects: {
 		"/docs": "/docs/introduction/get-started",
-        "/docs/introduction":  "/docs/introduction/get-started",
-        "/docs/setup": "/docs/setup/server"
+		"/docs/introduction": "/docs/introduction/get-started",
+		"/docs/setup": "/docs/setup/server",
 	},
 });
