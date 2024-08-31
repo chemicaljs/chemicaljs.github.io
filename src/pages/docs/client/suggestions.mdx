@@ -4,3 +4,15 @@ layout: "../../../layouts/Docs.astro"
 ---
 
 # Suggestions
+
+Get search suggestions via DuckDuckGo.
+
+```js
+await chemical.getSuggestions("google")
+```
+
+Returns an array of strings with a max amount of 8.
+
+```js
+["google", "google maps", "google docs", "google chrome", "google drive", "google translate", "google earth", "google flights"]
+```

@@ -23,7 +23,7 @@ export function FAQ() {
       <AccordionItem value="item-3">
 				<AccordionTrigger>Libcurl vs Epoxy</AccordionTrigger>
 				<AccordionContent>
-					Libcurl supports supports Firefox but is slower.
+					Libcurl supports Firefox but is slower than Epoxy.
 				</AccordionContent>
 			</AccordionItem>
       <AccordionItem value="item-4">
