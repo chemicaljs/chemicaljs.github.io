@@ -8,7 +8,6 @@ layout: "../../../layouts/Docs.astro"
 The Chemical fetch function operates like the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) but through Wisp.
 
 ```js
-const response = await fetch("https://example.com");
+const response = await chemical.fetch("https://example.com");
 const text = await response.text();
-console.log(text);
 ```
