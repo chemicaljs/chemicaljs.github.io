@@ -17,6 +17,12 @@ export default defineConfig({
 	redirects: {
 		"/docs": "/docs/introduction/get-started",
 		"/docs/introduction": "/docs/introduction/get-started",
-		"/docs/setup": "/docs/setup/server",
+		"/docs/server": "/docs/server/setup",
+    "/docs/client": "/docs/client/setup",
+    "/docs/vite": "/docs/vite/plugin",
+    "/docs/building": "/docs/building/build",
+    "/docs/server": "/docs/server/setup",
+    "/docs/components": "/docs/components/setup",
+    "/docs/examples": "/docs/examples/basic",
 	},
 });
