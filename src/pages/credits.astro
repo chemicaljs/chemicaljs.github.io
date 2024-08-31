@@ -1,0 +1,182 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Text } from "@/components/ui/text";
+import {
+	Card,
+	CardHeader,
+	CardTitle,
+	CardDescription,
+	CardContent,
+} from "@/components/ui/card";
+import { buttonVariants } from "@/components/ui/button";
+import { GithubIcon } from "astro-feather";
+---
+
+<Layout title="Credits | Chemical">
+	<div class="flex flex-col gap-12 py-12">
+		<div class="flex flex-col items-center">
+			<Text element="h1" as="h1">Credits</Text>
+			<Text element="p" as="p"
+				>These project power Chemical to create the ultimate proxy experience.</Text
+			>
+		</div>
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-8">
+			<Card className="flex flex-col justify-between">
+				<CardHeader>
+					<CardTitle>Bare Mux</CardTitle>
+					<CardDescription>
+						A system for managing http transports in a project such as
+						Ultraviolet.</CardDescription
+					>
+				</CardHeader>
+				<CardContent className="flex gap-2">
+					<a
+						href="https://github.com/MercuryWorkshop/bare-mux"
+						class={buttonVariants({ variant: "outline", size: "icon" })}
+					>
+						<GithubIcon size={16} />
+					</a>
+				</CardContent>
+			</Card>
+			<Card className="flex flex-col justify-between">
+				<CardHeader>
+					<CardTitle>Libcurl Transport</CardTitle>
+					<CardDescription>
+						A bare transport that implements end-to-end encryption with
+						libcurl.js and wisp.</CardDescription
+					>
+				</CardHeader>
+				<CardContent className="flex gap-2">
+					<a
+						href="https://github.com/MercuryWorkshop/CurlTransport"
+						class={buttonVariants({ variant: "outline", size: "icon" })}
+					>
+						<GithubIcon size={16} />
+					</a>
+				</CardContent>
+			</Card>
+			<Card className="flex flex-col justify-between">
+				<CardHeader>
+					<CardTitle>Epoxy Transport</CardTitle>
+					<CardDescription>
+						A bare transport that implements end-to-end encryption with
+						epoxy-tls and wisp.</CardDescription
+					>
+				</CardHeader>
+				<CardContent className="flex gap-2">
+					<a
+						href="https://github.com/MercuryWorkshop/EpoxyTransport"
+						class={buttonVariants({ variant: "outline", size: "icon" })}
+					>
+						<GithubIcon size={16} />
+					</a>
+				</CardContent>
+			</Card>
+			<Card className="flex flex-col justify-between">
+				<CardHeader>
+					<CardTitle>Wisp JS</CardTitle>
+					<CardDescription>
+						This is an implementation of a Wisp client, written in Javascript
+						for use in NodeJS and on the Web.</CardDescription
+					>
+				</CardHeader>
+				<CardContent className="flex gap-2">
+					<a
+						href="https://github.com/MercuryWorkshop/wisp-client-js/tree/rewrite"
+						class={buttonVariants({ variant: "outline", size: "icon" })}
+					>
+						<GithubIcon size={16} />
+					</a>
+				</CardContent>
+			</Card>
+			<Card className="flex flex-col justify-between">
+				<CardHeader>
+					<CardTitle>Ultraviolet</CardTitle>
+					<CardDescription>
+						Ultraviolet is a highly advanced web proxy used for evading internet
+						censorship or accessing websites in a controlled sandbox.</CardDescription
+					>
+				</CardHeader>
+				<CardContent className="flex gap-2">
+					<a
+						href="https://github.com/titaniumnetwork-dev/Ultraviolet"
+						class={buttonVariants({ variant: "outline", size: "icon" })}
+					>
+						<GithubIcon size={16} />
+					</a>
+				</CardContent>
+			</Card>
+			<Card className="flex flex-col justify-between">
+				<CardHeader>
+					<CardTitle>Scramjet</CardTitle>
+					<CardDescription>
+						Scramjet is the successor to Ultraviolet, a web proxy and sandboxing
+						tool, capable of sandboxing most modern websites.</CardDescription
+					>
+				</CardHeader>
+				<CardContent className="flex gap-2">
+					<a
+						href="https://github.com/MercuryWorkshop/scramjet"
+						class={buttonVariants({ variant: "outline", size: "icon" })}
+					>
+						<GithubIcon size={16} />
+					</a>
+				</CardContent>
+			</Card>
+			<Card className="flex flex-col justify-between">
+				<CardHeader>
+					<CardTitle>Rammerhead</CardTitle>
+					<CardDescription>
+						User friendly web proxy powered by testcafe-hammerhead.</CardDescription
+					>
+				</CardHeader>
+				<CardContent className="flex gap-2">
+					<a
+						href="https://github.com/binary-person/rammerhead"
+						class={buttonVariants({ variant: "outline", size: "icon" })}
+					>
+						<GithubIcon size={16} />
+					</a>
+				</CardContent>
+			</Card>
+			<Card className="flex flex-col justify-between">
+				<CardHeader>
+					<CardTitle>Ruby Network Rammerhead</CardTitle>
+					<CardDescription>
+						An easy way to use Rammerhead on the server.</CardDescription
+					>
+				</CardHeader>
+				<CardContent className="flex gap-2">
+					<a
+						href="https://github.com/Ruby-Network/rammerhead"
+						class={buttonVariants({ variant: "outline", size: "icon" })}
+					>
+						<GithubIcon size={16} />
+					</a>
+				</CardContent>
+			</Card>
+			<Card className="flex flex-col justify-between">
+				<CardHeader>
+					<CardTitle>Express</CardTitle>
+					<CardDescription>
+						Fast, unopinionated, minimalist web framework for node.</CardDescription
+					>
+				</CardHeader>
+				<CardContent className="flex gap-2">
+					<a
+						href="https://github.com/expressjs/express"
+						class={buttonVariants({ variant: "outline", size: "icon" })}
+					>
+						<GithubIcon size={16} />
+					</a>
+				</CardContent>
+			</Card>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	a:hover {
+		text-decoration: none;
+	}
+</style>

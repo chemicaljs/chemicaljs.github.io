@@ -1,0 +1,45 @@
+---
+title: "Decode"
+layout: "../../../layouts/Docs.astro"
+---
+
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+
+# Decodes
+
+Decodes an encoded URL.
+
+Using default service.
+
+```js
+const encodedURL = await chemical.encode("https://example.com")
+await chemical.decode(encodedURL)
+```
+
+Decode with another service.
+
+```js
+const encodedURL = await chemical.encode("https://example.com")
+await chemical.decode(encodedURL, {
+    service: "uv"
+})
+```
+
+## Config
+
+<Table className="not-prose">
+  <TableHeader>
+    <TableRow>
+      <TableHead>Property</TableHead>
+      <TableHead>Value</TableHead>
+      <TableHead className="text-right">Description</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>service</TableCell>
+      <TableCell>uv | scramjet | rammerhead</TableCell>
+      <TableCell className="text-right">Choose a proxy service.</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>

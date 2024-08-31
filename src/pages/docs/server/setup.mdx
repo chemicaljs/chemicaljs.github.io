@@ -1,0 +1,61 @@
+---
+title: "Setup"
+layout: "../../../layouts/Docs.astro"
+---
+
+# Setup
+
+The server configures Chemical, sends all the necessary files, host a Wisp server, and runs Rammerhead.
+
+## Installation
+
+Using NPM, install the `chemicaljs` package.
+
+```bash
+$ npm install chemicaljs
+```
+
+## Usage
+
+First import `ChemicalServer` and create a new server. This server is built on top of express.
+
+```js
+import { ChemicalServer } from "chemicaljs";
+
+const [app, listen] = new ChemicalServer({
+    default: "uv", //uv, scramjet, or rammerhead
+    uv: true,
+    scramjet: true,
+    rammerhead: true,
+    hostname_blacklist: [ /google\.com/, /reddit\.com/ ],
+    hostname_whitelist: [ /example\.com/ ]
+});
+```
+
+Use `app` like an express app. Use listen on your port of choice.
+
+Use `app.serveChemical()` to serve Chemical files.
+
+```js
+import { ChemicalServer } from "chemicaljs";
+import express from "express";
+
+const [app, listen] = new ChemicalServer();
+const port = process.env.PORT || 3000;
+
+app.use(express.static("public", {
+    index: "index.html",
+    extensions: ["html"]
+}));
+
+app.serveChemical();
+
+app.use((req, res) => {
+    res.status(404);
+    res.send("404 Error");
+});
+
+listen(port, () => {
+    console.log(`Chemical demo listening on port ${port}`);
+});
+```
