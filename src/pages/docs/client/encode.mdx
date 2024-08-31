@@ -3,4 +3,53 @@ title: "Encode"
 layout: "../../../layouts/Docs.astro"
 ---
 
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+
 # Encode
+
+Generate an encoded URL.
+
+Using default service, no auto https, and no search engine.
+
+```js
+await chemical.encode("https://example.com")
+```
+
+Advanced encoding with options.
+
+```js
+await chemical.encode("https://example.com", {
+    service: "uv",
+    autoHttps: true,
+    searchEngine: "https://www.google.com/search?q=%s"
+})
+```
+
+## Config
+
+<Table className="not-prose">
+  <TableHeader>
+    <TableRow>
+      <TableHead>Property</TableHead>
+      <TableHead>Value</TableHead>
+      <TableHead className="text-right">Description</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>service</TableCell>
+      <TableCell>uv | scramjet | rammerhead</TableCell>
+      <TableCell className="text-right">Choose a proxy service.</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>autoHttps</TableCell>
+      <TableCell>true | false</TableCell>
+      <TableCell className="text-right">Automatically add https:// if needed.</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>searchEngine</TableCell>
+      <TableCell>URL with %s for query</TableCell>
+      <TableCell className="text-right">Automatically search non-URLs.</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
