@@ -1,0 +1,34 @@
+---
+title: "Button"
+layout: "../../../layouts/Docs.astro"
+---
+
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+
+# Button
+
+Adds a button that triggers an [input](/docs/components/input).
+
+```html
+<input id="my-input" data-target="_blank" is="chemical-input">
+<button data-for="my-input" is="chemical-button">Go!</button>
+```
+
+## Config
+
+<Table className="not-prose">
+  <TableHeader>
+    <TableRow>
+      <TableHead>Property</TableHead>
+      <TableHead>Value</TableHead>
+      <TableHead className="text-right">Description</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>data-for</TableCell>
+      <TableCell>string</TableCell>
+      <TableCell className="text-right">ID of input component.</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>

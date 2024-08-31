@@ -1,0 +1,34 @@
+---
+title: "iFrame"
+layout: "../../../layouts/Docs.astro"
+---
+
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+
+# iFrame
+
+A hidden iframe that is show and set to the encoded URL from a [input](/docs/components/input).
+
+```html
+<input data-frame="my-iframe" is="chemical-input">
+<iframe id="my-iframe" is="chemical-iframe"></iframe>
+```
+
+## Config (For Input)
+
+<Table className="not-prose">
+  <TableHeader>
+    <TableRow>
+      <TableHead>Property</TableHead>
+      <TableHead>Value</TableHead>
+      <TableHead className="text-right">Description</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>data-frame</TableCell>
+      <TableCell>string</TableCell>
+      <TableCell className="text-right">ID of iframe component.</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
