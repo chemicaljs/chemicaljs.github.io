@@ -1,3 +1,0 @@
-# Website
-
-Website for Chemical.
