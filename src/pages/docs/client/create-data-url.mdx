@@ -1,0 +1,22 @@
+---
+title: "Create Data URL"
+layout: "../../../layouts/Docs.astro"
+---
+
+# Create Data URL
+
+Useful for creating proxied icons for tabs.
+
+## Usage
+
+Can be in any file format.
+
+```js
+await chemical.createDataURL("https://www.google.com/favicon.ico");
+```
+
+Return the data URL as a string.
+
+```
+data:image/x-icon;base64,...
+```

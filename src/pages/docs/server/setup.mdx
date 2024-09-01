@@ -23,9 +23,10 @@ First import `ChemicalServer` and create a new server. This server is built on t
 import { ChemicalServer } from "chemicaljs";
 
 const [app, listen] = new ChemicalServer({
-    default: "uv", //uv, scramjet, or rammerhead
+    default: "uv",
     uv: true,
     scramjet: true,
+    meteor: true,
     rammerhead: true,
     hostname_blacklist: [ /google\.com/, /reddit\.com/ ],
     hostname_whitelist: [ /example\.com/ ]
