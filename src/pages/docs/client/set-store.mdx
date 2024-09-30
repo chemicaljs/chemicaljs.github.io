@@ -1,0 +1,22 @@
+---
+title: "Set Store"
+layout: "../../../layouts/Docs.astro"
+---
+
+# Set Store
+
+Saves a valued used by Chemical in localStorage. Stores will need to be enabled for transport and wisp in [Setup](/docs/client/setup/) and the rest in the [Input Component](/docs/components/input/).
+
+You can set: "transport", "wisp", "service", "autoHttps", "searchEngine"
+
+```js
+chemical.setStore("service", "rammerhead")
+```
+
+You can listen for a change from `chemicalStoreChange`.
+
+```js
+window.addEventListener("chemicalStoreChange", function ({ detail }) {
+    console.log(detail.key, detail.value);
+});
+```
