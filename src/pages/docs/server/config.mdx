@@ -39,14 +39,14 @@ const [app, listen] = new ChemicalServer({
       <TableCell className="text-right">Enable Ultraviolet.</TableCell>
     </TableRow>
     <TableRow>
-      <TableCell>scramjet</TableCell>
+      <TableCell>experimental.scramjet</TableCell>
       <TableCell>true | false</TableCell>
-      <TableCell className="text-right">Enable Scramjet.</TableCell>
+      <TableCell className="text-right">Enable Scramjet (default false).</TableCell>
     </TableRow>
     <TableRow>
-      <TableCell>meteor</TableCell>
+      <TableCell>experimental.meteor</TableCell>
       <TableCell>true | false</TableCell>
-      <TableCell className="text-right">Enable Meteor.</TableCell>
+      <TableCell className="text-right">Enable Meteor (default false).</TableCell>
     </TableRow>
     <TableRow>
       <TableCell>rammerhead</TableCell>
@@ -54,14 +54,9 @@ const [app, listen] = new ChemicalServer({
       <TableCell className="text-right">Enable Rammerhead.</TableCell>
     </TableRow>
     <TableRow>
-      <TableCell>hostname_blacklist</TableCell>
-      <TableCell>array of regex</TableCell>
-      <TableCell className="text-right">Regex array of URLs to block.</TableCell>
-    </TableRow>
-    <TableRow>
-      <TableCell>hostname_whitelist</TableCell>
-      <TableCell>array of regex</TableCell>
-      <TableCell className="text-right">Regex array of URLs to not block. Overrides blacklist.</TableCell>
+      <TableCell>wispOptions</TableCell>
+      <TableCell>object</TableCell>
+      <TableCell className="text-right">Any Wisp [options](https://github.com/MercuryWorkshop/wisp-client-js/tree/rewrite?tab=readme-ov-file#changing-server-settings).</TableCell>
     </TableRow>
   </TableBody>
 </Table>

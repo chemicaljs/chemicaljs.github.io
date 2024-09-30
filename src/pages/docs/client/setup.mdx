@@ -22,7 +22,7 @@ To install the client script, add it to the head of your website.
 You can change the default Wisp server with the `data-wisp` attribute. It is highly recommended to host your own Wisp server.
 
 ```html
-<script data-wisp="wss://mywispserver.com/" src="/chemical.js"></script>
+<script data-wisp="wss://example.com/wisp/" src="/chemical.js"></script>
 ```
 
 ## Transport
@@ -31,4 +31,16 @@ You can change the default transport with the `data-transport` attribute. Use `l
 
 ```html
 <script data-transport="epoxy" src="/chemical.js"></script>
+```
+
+## Store
+
+Use the `data-wisp-store` and `data-transport-store` attributes to use Chemical store. Once set, values will be saved for when you revisit the site. Set the store using [setStore](/docs/client/set-store).
+
+```html
+<script data-wisp-store src="/chemical.js"></script>
+```
+
+```js
+chemical.setStore("transport", "epoxy")
 ```

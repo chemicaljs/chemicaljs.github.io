@@ -1,0 +1,38 @@
+---
+title: "Select"
+layout: "../../../layouts/Docs.astro"
+---
+
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+
+# Select
+
+Creates a select menu the defaults to a stored item and runs [setStore](/docs/client/set-store/) on choose.
+
+```html
+<select is="chemical-select" data-default-store="service">
+    <option value="uv">Ultraviolet</option>
+    <option value="rammerhead">Rammerhead</option>
+    <option value="scramjet">Scramjet</option>
+    <option value="meteor">Meteor</option>
+</select>
+```
+
+## Config
+
+<Table className="not-prose">
+  <TableHeader>
+    <TableRow>
+      <TableHead>Property</TableHead>
+      <TableHead>Value</TableHead>
+      <TableHead className="text-right">Description</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>data-default-store</TableCell>
+      <TableCell>string</TableCell>
+      <TableCell className="text-right">Store corresponding to the value of an option.</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
