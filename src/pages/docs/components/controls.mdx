@@ -9,17 +9,17 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 
 Adds controls for an [iframe](/docs/components/iframe).
 
-`chemicalAction` takes two arguments, a command (back, forward, reload, or close) and an ID of a iframe component.
+`chemical.componentAction` takes two arguments, a command (back, forward, reload, or close) and an ID of a iframe component.
 
 The close function hides the iframe and controls.
 
 ```html
 <input data-frame="my-iframe" is="chemical-input">
 <section id="my-controls" is="chemical-controls">
-    <button onclick="chemicalAction('back', 'my-iframe')">←Back</button>
-    <button onclick="chemicalAction('forward', 'my-iframe')">Forward</button>
-    <button onclick="chemicalAction('reload', 'my-iframe')">Reload</button>
-    <button onclick="chemicalAction('close', 'my-iframe')">Close</button>
+    <button onclick="chemical.componentAction('back', 'my-iframe')">Back</button>
+    <button onclick="chemical.componentAction('forward', 'my-iframe')">Forward</button>
+    <button onclick="chemical.componentAction('reload', 'my-iframe')">Reload</button>
+    <button onclick="chemical.componentAction('close', 'my-iframe')">Close</button>
 </section>
 <iframe data-controls="my-controls" id="my-iframe" is="chemical-iframe"></iframe>
 ```
