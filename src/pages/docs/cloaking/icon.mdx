@@ -1,0 +1,20 @@
+---
+title: "Icon"
+layout: "../../../layouts/Docs.astro"
+---
+
+# Icon
+
+In your favicon element change `is` to `chemical-icon` and make sure to set the store.
+
+```html
+<link rel="icon" is="chemical-icon" data-icon-store href="/favicon.ico"></title>
+```
+
+## Updating the Icon
+
+If the icon store attribute is set, use Chemical Store to change the icon. Set empty to reset.
+
+```
+chemical.setStore("icon", "https://www.google.com/favicon.ico")
+```

@@ -1,0 +1,20 @@
+---
+title: "Title"
+layout: "../../../layouts/Docs.astro"
+---
+
+# Title
+
+In your title element change `is` to `chemical-title` and make sure to set the store.
+
+```html
+<title is="chemical-title" data-title-store>Default</title>
+```
+
+## Updating the Title
+
+If the title store attribute is set, use Chemical Store to change the title. Set empty to reset.
+
+```
+chemical.setStore("title", "Cloaked Title")
+```
