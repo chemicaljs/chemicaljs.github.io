@@ -39,7 +39,7 @@ The most common way to use Chemical is adding it to your main layout file so it 
 +page.svelte
 ```svelte
 <script>
-  import Frame from "../../../chemical/Frame.svelte";
+  import Frame from "chemicaljs/Frame";
   import { getContext } from "svelte";
 
   let chemState = getContext("chemState");
