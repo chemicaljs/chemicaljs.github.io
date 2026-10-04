@@ -1,0 +1,1 @@
+import{d as e,j as t,m as n}from"../chunks/BZXiIQbw.js";import"../chunks/xihTtKlq.js";function r(r){t();var i=n(`credits`);e(r,i)}export{r as component};
