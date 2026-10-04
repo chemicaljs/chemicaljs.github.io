@@ -1,0 +1,7 @@
+import{F as e,L as t,S as n,b as r,u as i}from"../chunks/BosnV9mv.js";var a=n(`<h1>Wisp</h1> <p>Change the wisp URL to something other then the built in server.</p> <!>`,1);function o(n){var o=a(),s=t(e(o),4);i(s,()=>`<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">script</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#F97583">  import</span><span style="color:#E1E4E8"> Chemical </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "chemicaljs/Chemical"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  let</span><span style="color:#E1E4E8"> wisp </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> $</span><span style="color:#B392F0">state</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"wss://example.com/wisp/"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">script</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#79B8FF">Chemical</span><span style="color:#F97583"> bind</span><span style="color:#E1E4E8">:</span><span style="color:#FFAB70">wisp</span><span style="color:#E1E4E8"> /></span></span></code></pre>`),r(n,o)}export{o as component};
