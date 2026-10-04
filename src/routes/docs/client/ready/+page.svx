@@ -1,0 +1,17 @@
+# Ready
+
+Determines when Chemical is ready, the service worker is registered and Scramjet has loaded. 
+
+```svelte
+<script>
+  import Chemical from "chemicaljs/Chemical";
+
+  let ready = $state(false);
+</script>
+
+<Chemical bind:ready onready={() => console.log("Chemical is ready")} />
+
+{#if ready}
+  <p>Chemical is ready</p>
+{/if}
+ ```

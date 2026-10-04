@@ -1,0 +1,32 @@
+# Autocomplete
+
+Get search suggestions through the current transport.
+
+```svelte
+<script>
+  import Chemical from "chemicaljs/Chemical";
+
+  let chemical = $state();
+
+  async function getSuggestions() {
+    await chemical.autocomplete("math", "google"))
+  }
+</script>
+
+<Chemical
+  bind:this={chemical}
+/>
+```
+
+## Search Engine
+
+Leave the second parameter blank to default to google or use one of the following:
+
+```js
+chemical.autocomplete("math")) //google
+chemical.autocomplete("math", "google"))
+chemical.autocomplete("math", "duckduckgo"))
+chemical.autocomplete("math", "bing"))
+chemical.autocomplete("math", "brave"))
+chemical.autocomplete("math", "yahoo"))
+```

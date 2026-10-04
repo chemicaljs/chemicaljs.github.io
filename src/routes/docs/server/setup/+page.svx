@@ -1,0 +1,23 @@
+# Server Setup
+
+The server serves Scramjet files and create default a wisp server.
+
+## Installation
+
+Using NPM, install the `chemicaljs` package.
+
+# Usage
+
+First import `ChemicalServer` and create a new server. This server is built on top of express.
+
+```js
+import { Chemical } from "chemicaljs";
+
+const server = new Chemical({
+  port: 8000, //The port the server runs on
+  staticDir: "build", //Serve static svelte assets
+  spaMode: false, //Serve "index.html" on all unknown routes
+});
+
+await server.start();
+```

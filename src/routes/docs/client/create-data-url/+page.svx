@@ -1,0 +1,17 @@
+# Create Data URL
+
+Useful for creating proxied icons for tabs.
+
+```svelte
+<script>
+  import Chemical from "chemicaljs/Chemical";
+
+  let chemical = $state();
+
+  async function generateIcon() {
+    await chemical.createDataURL("https://www.google.com/favicon.ico");
+  }
+</script>
+
+<Chemical bind:this={chemical} />
+```
