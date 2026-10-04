@@ -44,10 +44,6 @@ export default [
         path: "wisp",
       },
       {
-        title: "URL",
-        path: "url",
-      },
-      {
         title: "Frame",
         path: "frame",
       },
