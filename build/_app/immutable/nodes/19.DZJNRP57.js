@@ -1,0 +1,6 @@
+import{F as e,L as t,S as n,b as r,u as i}from"../chunks/BosnV9mv.js";var a=n(`<h1>Vite Plugin</h1> <p>Use Chemical in your Vite developement server</p> <p>Add the Chemical Vite plugin in your vite configuration file <code>vite.config.js</code> or <code>vite.config.ts</code></p> <!>`,1);function o(n){var o=a(),s=t(e(o),6);i(s,()=>`<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> &#123; defineConfig &#125; </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "vite"</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> &#123; ChemicalVitePlugin &#125; </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "chemicaljs"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> default</span><span style="color:#B392F0"> defineConfig</span><span style="color:#E1E4E8">(&#123;</span></span>
+<span class="line"><span style="color:#E1E4E8">    plugins: [</span><span style="color:#B392F0">ChemicalVitePlugin</span><span style="color:#E1E4E8">()],</span></span>
+<span class="line"><span style="color:#E1E4E8">&#125;)</span></span></code></pre>`),r(n,o)}export{o as component};
