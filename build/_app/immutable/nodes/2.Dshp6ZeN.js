@@ -1,0 +1,1 @@
+import{d as e,p as t}from"../chunks/BZXiIQbw.js";import"../chunks/xihTtKlq.js";var n=t(`<h1>Obsidian</h1>`);function r(t){var r=n();e(t,r)}export{r as component};
