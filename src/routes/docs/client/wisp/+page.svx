@@ -1,0 +1,13 @@
+# Wisp
+
+Change the wisp URL to something other then the built in server.
+
+```svelte
+<script>
+  import Chemical from "chemicaljs/Chemical";
+
+  let wisp = $state("wss://example.com/wisp/");
+</script>
+
+<Chemical bind:wisp />
+```

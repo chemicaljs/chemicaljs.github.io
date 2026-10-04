@@ -1,0 +1,26 @@
+<script>
+  import Lightbulb from "@lucide/svelte/icons/lightbulb";
+</script>
+
+# Get Started
+
+<div
+  class="flex rounded-xl border border-slate-800 text-sm p-4 gap-4 flex-row items-center w-fit"
+>
+  <Lightbulb />
+  <div class="flex flex-col gap-1">
+    <span>Note</span>
+    <span class="text-slate-400"
+      >Just want to make a basic proxy site? Check out the <a
+        class="text-slate-400"
+        href="/docs/examples/basic/">basic example</a
+      >.</span
+    >
+  </div>
+</div>
+
+Chemical is a package that takes care of setting up a proxy with Scramjet both the backend and with a Svelte frontend.
+
+This can be great for people with less experience looking to create a proxy site, or just to have a clean, simple codebase.
+
+To setup Chemical, create a server to serve Scramjet files and create default a wisp server.

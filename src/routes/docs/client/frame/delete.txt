@@ -1,0 +1,68 @@
+<script>
+  import Chemical from "$lib/chemicaljs/Chemical.svelte";
+  import Frame from "$lib/chemicaljs/Frame.svelte";
+
+  let ready = $state(false);
+  let chemical = $state();
+  let transport = $state("epoxy");
+  let wisp = $state("wss://wisp.freewisp.org/");
+
+  let frame1 = $state();
+</script>
+
+<button onclick={() => console.log(chemical.fetch("https://example.com"))}
+  >fetch test</button
+>
+<button
+  onclick={async () =>
+    console.log(await chemical.autocomplete("math", "brave"))}
+  >autocomplete test</button
+>
+<button
+  onclick={async () =>
+    console.log(
+      await chemical.createDataURL("https://www.google.com/favicon.ico"),
+    )}>createDataURL test</button
+>
+
+<button onclick={() => (transport = "epoxy")}>epoxy</button>
+<button onclick={() => (transport = "libcurl")}>libcurl</button>
+<button onclick={() => (wisp = "wss://fake.freewisp.org/")}>change wisp</button>
+<Chemical
+  bind:this={chemical}
+  bind:ready
+  bind:transport
+  bind:wisp
+  onready={() => console.log(chemical.url("https://playobsidian.com"))}
+/>
+
+<input
+  onkeydown={(e) => e.key === "Enter" && frame1.go(e.target.value)}
+  placeholder="Enter URL"
+/>
+<button onclick={() => frame1.go("example.com", { autoHttps: true })}
+  >autohttps</button
+>
+<button
+  onclick={() =>
+    frame1.go("kittens", {
+      searchEngine: chemical.searchEngines.google,
+    })}>search engine test</button
+>
+<button onclick={() => frame1.reload()}>reload</button>
+<button onclick={() => frame1.forward()}>forward</button>
+<button onclick={() => frame1.back()}>back</button>
+
+<Frame
+  bind:this={frame1}
+  class="w-full h-screen"
+  adblock={true}
+  catchlinks={(url) =>
+    new URL(`/?goto=${encodeURIComponent(url.href)}`, location.origin)}
+  linkhandler={(url) => window.open("?url=" + encodeURIComponent(url))}
+  cache={false}
+  onchange={(url) => console.log("Frame URL changed to: " + url)}
+  src="https://www.example.com"
+  bind:ready
+  bind:chemical
+></Frame>

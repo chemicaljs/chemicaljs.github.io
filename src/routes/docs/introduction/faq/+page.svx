@@ -1,0 +1,20 @@
+# Frequently Asked Questions
+
+If your question is not answered here, create an [issue on GitHub](https://github.com/chemicaljs/chemical/issues/new).
+
+<details>
+  <summary>Do I have to use Svelte?</summary>
+  <span>Yes, previously Chemical supported any framework but in V3 it was made Svelte only.</span>
+</details>
+<details>
+  <summary>Does Chemical support Ultraviolet or Rammerhead?</summary>
+  <span>No, previously Chemical supported other proxies besides Scramjet but Scramjet is the future and it just simplifies things.</span>
+</details>
+<details>
+  <summary>Epoxy vs Libcurl</summary>
+  <span>Libcurl supports Firefox but is slower than Epoxy.</span>
+</details>
+<details>
+  <summary>There are no bare clients</summary>
+  <span>There is no bare transport so this should not exist.</span>
+</details>
