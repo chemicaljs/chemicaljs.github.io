@@ -99,7 +99,7 @@ Choose from built in Scramjet plugins
 />
 ```
 
-## Events 
+## Events
 
 Listen for pointer, keyboard, and load events inside the Frame
 
@@ -116,4 +116,6 @@ Listen for pointer, keyboard, and load events inside the Frame
 
 ## Helper Functions
 
-Get the frame document title using `frame.getTitle()`
+Get the current frame document title using `frame.getTitle()`
+
+Reset the frame with `frame.reset()`
