@@ -40,7 +40,7 @@
   </div>
   <div class="flex justify-end w-34">
     <a
-      href="/"
+      href="https://github.com/chemicaljs/chemical"
       class="rounded-lg flex gap-1.5 items-center justify-center cursor-pointer text-sm transition-colors bg-slate-800 size-9"
     >
       <SiGithub size="16" />
