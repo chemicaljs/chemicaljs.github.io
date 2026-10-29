@@ -25,6 +25,13 @@ Results are return in json format with `plain` and `rich` results from Google
 ```js
 [
     {
+        "type": "math",
+        "data": {
+            equation: "1+1",
+            result: "2",
+        }
+    },
+    {
         "type": "plain",
         "data": [
             {
@@ -42,7 +49,8 @@ Results are return in json format with `plain` and `rich` results from Google
         "type": "rich",
         "data": {
             "title": "Google",
-            "image": "data:image/png;base64"
+            "description: "Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking for.", //Optional
+            "image": "data:image/png;base64" //Optional
         }
     },
 ]
