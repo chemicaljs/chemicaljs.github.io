@@ -9,7 +9,7 @@ Get search suggestions through the current transport.
   let chemical = $state();
 
   async function getSuggestions() {
-    await chemical.autocomplete("math", "google"))
+    await chemical.autocomplete("math"))
   }
 </script>
 
@@ -18,15 +18,32 @@ Get search suggestions through the current transport.
 />
 ```
 
-## Search Engine
+## Parsing Data
 
-Leave the second parameter blank to default to google or use one of the following:
+Results are return in json format with `plain` and `rich` results from Google
 
 ```js
-chemical.autocomplete("math")) //google
-chemical.autocomplete("math", "google"))
-chemical.autocomplete("math", "duckduckgo"))
-chemical.autocomplete("math", "bing"))
-chemical.autocomplete("math", "brave"))
-chemical.autocomplete("math", "yahoo"))
+[
+    {
+        "type": "plain",
+        "data": [
+            {
+                "text": "g",
+                "highlight": false
+            },
+            {
+                "text": "mail",
+                "highlight": true
+            }
+        ],
+        "fullURL": "gmail"
+    },
+    {
+        "type": "rich",
+        "data": {
+            "title": "Google",
+            "image": "data:image/png;base64"
+        }
+    },
+]
 ```

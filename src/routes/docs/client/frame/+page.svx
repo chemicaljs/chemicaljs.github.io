@@ -39,9 +39,11 @@ The client Frame component creates an iFrame and uses `controller.createFrame` w
 `[frame state].go()` also accepts options
 
 ```js
+import searchEngines from "chemicaljs/searchEngines";
+
 frame.go("https://example.com", {
   autoHttps: true, //Default false
-  searchEngine: chemical.searchEngines.google, //Default blank
+  searchEngine: searchEngines.google, //Default blank
 })
 ```
 
@@ -51,11 +53,11 @@ frame.go("https://example.com", {
 
 Built in search search engines
 ```bash
-chemical.searchEngines.google
-chemical.searchEngines.duckduckgo
-chemical.searchEngines.bing
-chemical.searchEngines.brave
-chemical.searchEngines.yahoo
+searchEngines.google
+searchEngines.duckduckgo
+searchEngines.bing
+searchEngines.brave
+searchEngines.yahoo
 ```
 
 ## Controls
@@ -96,3 +98,22 @@ Choose from built in Scramjet plugins
   src="https://www.example.com"
 />
 ```
+
+## Events 
+
+Listen for pointer, keyboard, and load events inside the Frame
+
+```svelte
+<Frame
+  onpointerdown={(e) => console.log("Pointer down inside frame")}
+  onkeydown={(e) => console.log("Key pressed inside frame: " + e.key)}
+  onload={(e) => console.log("Frame finished loading")}
+  bind:ready
+  bind:chemical
+  src="https://www.example.com"
+/>
+```
+
+## Helper Functions
+
+Get the frame document title using `frame.getTitle()`
