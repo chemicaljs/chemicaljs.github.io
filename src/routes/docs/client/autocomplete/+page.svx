@@ -20,15 +20,15 @@ Get search suggestions through the current transport.
 
 ## Parsing Data
 
-Results are return in json format with `plain` and `rich` results from Google
+Results are return in json format with `plain` and `rich` results from Google and `math` for math results.
 
 ```js
 [
     {
         "type": "math",
         "data": {
-            equation: "1+1",
-            result: "2",
+            "equation": "1+1",
+            "result": "2",
         }
     },
     {
