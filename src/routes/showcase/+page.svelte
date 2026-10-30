@@ -19,7 +19,7 @@
         class="flex flex-col rounded-xl border border-slate-800 text-sm p-4 gap-4"
       >
         <img
-          class="rounded-lg"
+          class="rounded-lg aspect-2/1"
           alt={project.title + "Preview"}
           draggable="False"
           src={project.preview}
