@@ -116,6 +116,8 @@ Listen for pointer, keyboard, and load events inside the Frame
 
 ## Helper Functions
 
+Fullscreen the frame with `frame.fullscreen()`
+
 Get the current frame document title using `frame.getTitle()`
 
 Reset the frame with `frame.reset()`
