@@ -1,4 +1,4 @@
-import{F as e,L as t,S as n,b as r,u as i}from"../chunks/B7HogDOQ.js";var a=n(`<h1>Autocomplete</h1> <p>Get search suggestions through the current transport.</p> <!> <h2>Parsing Data</h2> <p>Results are return in json format with <code>plain</code> and <code>rich</code> results from Google</p> <!>`,1);function o(n){var o=a(),s=t(e(o),4);i(s,()=>`<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">script</span><span style="color:#E1E4E8">></span></span>
+import{F as e,L as t,S as n,b as r,u as i}from"../chunks/B7HogDOQ.js";var a=n(`<h1>Autocomplete</h1> <p>Get search suggestions through the current transport.</p> <!> <h2>Parsing Data</h2> <p>Results are return in json format with <code>plain</code> and <code>rich</code> results from Google and <code>math</code> for math results.</p> <!>`,1);function o(n){var o=a(),s=t(e(o),4);i(s,()=>`<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">script</span><span style="color:#E1E4E8">></span></span>
 <span class="line"><span style="color:#F97583">  import</span><span style="color:#E1E4E8"> Chemical </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "chemicaljs/Chemical"</span><span style="color:#E1E4E8">;</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#F97583">  let</span><span style="color:#E1E4E8"> chemical </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> $</span><span style="color:#B392F0">state</span><span style="color:#E1E4E8">();</span></span>
@@ -14,8 +14,8 @@ import{F as e,L as t,S as n,b as r,u as i}from"../chunks/B7HogDOQ.js";var a=n(`<
 <span class="line"><span style="color:#E1E4E8">    &#123;</span></span>
 <span class="line"><span style="color:#9ECBFF">        "type"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"math"</span><span style="color:#E1E4E8">,</span></span>
 <span class="line"><span style="color:#9ECBFF">        "data"</span><span style="color:#E1E4E8">: &#123;</span></span>
-<span class="line"><span style="color:#E1E4E8">            equation: </span><span style="color:#9ECBFF">"1+1"</span><span style="color:#E1E4E8">,</span></span>
-<span class="line"><span style="color:#E1E4E8">            result: </span><span style="color:#9ECBFF">"2"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">            "equation"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"1+1"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">            "result"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"2"</span><span style="color:#E1E4E8">,</span></span>
 <span class="line"><span style="color:#E1E4E8">        &#125;</span></span>
 <span class="line"><span style="color:#E1E4E8">    &#125;,</span></span>
 <span class="line"><span style="color:#E1E4E8">    &#123;</span></span>
