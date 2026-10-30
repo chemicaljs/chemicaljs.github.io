@@ -1,17 +1,17 @@
 export default [
   {
+    title: "Metallic",
+    description: "A powerful web proxy built for speed and customization.",
+    preview: "/showcase/metallic.png",
+    website: "https://metallic.eu.org/",
+    github: "https://github.com/Metallic-Web/Metallic",
+  },
+  {
     title: "nano.",
     description: "A minimalist web proxy built to be simple yet powerful.",
     preview: "/showcase/nano.png",
     website: "https://nano-proxy.github.io/",
     github: "https://github.com/titaniumnetwork-dev/nano",
-  },
-  {
-    title: "Metallic",
-    description: "A powerful web proxy built for speed and customization.",
-    preview: "/showcase/metallic.png",
-    website: "https://metallic.eu.org/",
-    github: "https://github.com/cognetwork-dev/Metallic",
   },
   {
     title: "Oxide",
