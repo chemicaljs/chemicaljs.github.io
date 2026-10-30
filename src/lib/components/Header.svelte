@@ -10,7 +10,7 @@
     <div
       class="h-6 px-2 py-0.5 text-xs rounded-full bg-slate-800 flex items-center"
     >
-      v3.1.7
+      v3.1.8
     </div>
   </div>
   <div class="flex gap-2">
