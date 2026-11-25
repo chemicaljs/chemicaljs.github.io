@@ -52,6 +52,10 @@ export default [
         path: "plugins",
       },
       {
+        title: "Internal URLs",
+        path: "internal-urls",
+      },
+      {
         title: "Fetch",
         path: "fetch",
       },

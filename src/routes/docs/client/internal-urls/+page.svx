@@ -1,0 +1,213 @@
+# Internal URLs
+
+`InternalUrlsPlugin` lets you register custom `internal://` (or custom-scheme) pages that render inside `<Frame>` and `<Tabs>` without going through Scramjet.
+
+Pages can be Svelte 5 components, snippets, or HTML strings, and integrate automatically with the address bar, autocomplete, tab titles and favicons, back/forward navigation, reload, and `persist`.
+
+## Setup
+
+Create an `InternalUrlsPlugin` instance and pass it to `<Chemical plugins={[...]}>` to enable it across all frames and tabs, or pass it directly to a single `<Frame>` or `<TabFrame>`.
+
+```svelte
+<script>
+  import Chemical from "chemicaljs/Chemical";
+  import { InternalUrlsPlugin } from "chemicaljs/InternalUrlsPlugin";
+  import {
+    AddressBar,
+    Autocomplete,
+    NewTab,
+    Tab,
+    TabBar,
+    TabClose,
+    TabFavicon,
+    TabFrame,
+    Tabs,
+    TabTitle,
+  } from "chemicaljs/tabs";
+  import Settings from "./Settings.svelte";
+  import History from "./History.svelte";
+
+  let chemical = $state();
+  let ready = $state(false);
+  let tabs = $state();
+
+  const internalUrls = new InternalUrlsPlugin({
+    routes: {
+      settings: {
+        title: "Settings",
+        component: Settings,
+      },
+      history: {
+        title: "History",
+        component: History,
+      },
+      about: {
+        title: "About",
+        html: "<h1>Chemical</h1><p>Custom internal page</p>",
+      },
+    },
+  });
+</script>
+
+<Chemical bind:ready bind:this={chemical} plugins={[internalUrls]}/>
+
+<Tabs bind:this={tabs} persist {chemical} {ready}>
+  <TabBar>
+    <Tab>
+      <TabFavicon>🌐</TabFavicon>
+      <TabTitle/>
+      <TabClose>✕</TabClose>
+    </Tab>
+    <NewTab>+</NewTab>
+  </TabBar>
+
+  <div>
+    <button onclick={() => tabs.back()} disabled={!tabs?.canBack()}>‹</button>
+    <button onclick={() => tabs.forward()} disabled={!tabs?.canForward()}>
+      ›
+    </button>
+    <button onclick={() => tabs.reload()}>↻</button>
+    <AddressBar placeholder="Search or enter URL"/>
+    <Autocomplete/>
+    <button onclick={() => tabs.go("internal://settings")}>Settings</button>
+  </div>
+
+  <TabFrame/>
+</Tabs>
+```
+
+### Standalone Frame Usage
+
+```svelte
+<script>
+  import Chemical from "chemicaljs/Chemical";
+  import Frame from "chemicaljs/Frame";
+  import { InternalUrlsPlugin } from "chemicaljs/InternalUrlsPlugin";
+  import Settings from "./Settings.svelte";
+
+  let chemical = $state();
+  let ready = $state(false);
+  let frame = $state();
+
+  const internalUrls = new InternalUrlsPlugin({
+    routes: {
+      settings: { title: "Settings", component: Settings },
+    },
+  });
+</script>
+
+<Chemical bind:ready bind:this={chemical}/>
+<Frame bind:chemical bind:ready bind:this={frame} plugins={[internalUrls]} src="internal://settings"/>
+```
+
+## Options
+
+```js
+new InternalUrlsPlugin({
+  scheme: "internal",
+  routes: {},
+  fallback: undefined,
+  history: false,
+});
+```
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `scheme` | `string` | `"internal"` | URL scheme prefix (e.g. `"internal"` matches `internal://...`). |
+| `routes` | `Record<string, Route>` | `{}` | Map of route patterns to route definitions. |
+| `fallback` | `Route` | Built-in 404 page | Rendered when a matching scheme URL does not match any route. |
+| `history` | `boolean` | `false` | Whether internal page visits are added to `getHistory()`. Can be overridden per route. |
+
+You can also add or remove routes dynamically with `plugin.register(pattern, route)` and `plugin.unregister(pattern)`.
+
+## Defining Routes
+
+Each route entry can be an object, a Svelte component directly, or an HTML string directly:
+
+```js
+new InternalUrlsPlugin({
+  routes: {
+    settings: SettingsComponent,
+    about: "<h1>About</h1>",
+    history: {
+      title: "History",
+      favicon: "data:image/svg+xml,...",
+      component: HistoryComponent,
+      props: { showSearch: true },
+      history: false,
+    },
+    "docs/:slug": {
+      title: ({ params }) => `Docs: ${params.slug}`,
+      component: DocsPage,
+    },
+    "files/*": {
+      title: "Files",
+      html: ({ params }) => `<h1>Path: ${params["*"]}</h1>`,
+    },
+    "*": {
+      title: "Not Found",
+      html: ({ url }) => `<h1>Unknown page: ${url}</h1>`,
+    },
+  },
+});
+```
+
+| Route Field | Type | Description |
+| --- | --- | --- |
+| `component` | `Component` | Svelte 5 component rendered inside the frame viewport. |
+| `snippet` | `Snippet` | Svelte 5 snippet rendered with the internal route context. |
+| `html` | `string \| (ctx) => string` | HTML document rendered inside an isolated `srcdoc` iframe. |
+| `props` | `object \| (ctx) => object` | Extra props merged into `component`. |
+| `title` | `string \| (ctx) => string` | Tab/frame title (defaults to the `<title>` tag for HTML routes, or the route path). |
+| `favicon` | `string \| (ctx) => string` | Favicon data URL (defaults to `<link rel="icon">` `data:` URI for HTML routes). |
+| `history` | `boolean` | Overrides the plugin's default `history` recording setting for this route. |
+
+## Component Props
+
+Svelte components (and snippets, via their argument) automatically receive navigation, history, and URL context:
+
+```svelte
+<script>
+  let {
+    url,
+    path,
+    params,
+    searchParams,
+    hash,
+    go,
+    openTab,
+    back,
+    forward,
+    reload,
+    setTitle,
+    setFavicon,
+    getHistory,
+    removeHistory,
+    clearHistory,
+    chemical,
+    tabs,
+  } = $props();
+</script>
+
+<h1>History</h1>
+<button onclick={() => clearHistory()}>Clear all</button>
+
+{#each getHistory() as entry (entry.id)}
+  <div>
+    <button onclick={() => go(entry.url)}>{entry.title}</button>
+    <button onclick={() => removeHistory(entry.id)}>✕</button>
+  </div>
+{/each}
+```
+
+## HTML Page Bridge
+
+HTML routes (`html: ...`) run inside a `srcdoc` iframe with automatic link handling and a `window.chemical` helper:
+
+* `<a href="https://example.com">` and `<a href="internal://settings">` navigate inside the frame.
+* `<a href="..." target="_blank">` and `window.open(...)` open a new tab when inside `<Tabs>`.
+* `window.chemical` exposes `url`, `scheme`, `path`, `params`, `searchParams`, `hash`, `go`, `back`, `forward`, `canBack`, `canForward`, `reload`, `open`, `setTitle`, and `setFavicon`.
+
+## Autocomplete
+
+When registered on `<Chemical plugins={[internalUrls]}>`, typing `internal://` in `<AddressBar>` suggests matching static routes directly in `<Autocomplete>` without sending queries to Google.
