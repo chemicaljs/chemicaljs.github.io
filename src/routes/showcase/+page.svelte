@@ -20,8 +20,8 @@
       >
         <img
           class="rounded-lg aspect-2/1"
-          alt={project.title + "Preview"}
-          draggable="False"
+          alt={`${project.title} Preview`}
+          draggable="false"
           src={project.preview}
         />
         <div class="flex gap-1.5 items-center">

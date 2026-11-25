@@ -1,17 +1,21 @@
 # Fetch
 
-Polyfill for native fetch using the current transport.
+Proxied `fetch` using the current transport. Wait until `ready` is `true` before calling it.
 
 ```svelte
 <script>
   import Chemical from "chemicaljs/Chemical";
 
   let chemical = $state();
+  let ready = $state(false);
 
   async function fetchContent() {
-    await chemical.fetch("https://example.com")
+    if (!ready) return;
+    const response = await chemical.fetch("https://example.com");
+    const text = await response.text();
+    console.log(text);
   }
 </script>
 
-<Chemical bind:this={chemical} />
+<Chemical bind:ready bind:this={chemical}/>
 ```

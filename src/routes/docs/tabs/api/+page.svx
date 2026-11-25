@@ -1,0 +1,54 @@
+# Tabs API
+
+## `<Tabs>` Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `chemical` | `object` | `undefined` | `Chemical` component instance. |
+| `ready` | `boolean` | `false` | Ready state from `<Chemical>`. |
+| `searchEngine` | `string` | `searchEngines.google` | Default search engine template for all tabs. |
+| `reorderable` | `boolean` | `true` | Enables pointer drag reordering of tabs. |
+| `persist` | `boolean \| string` | `false` | Saves tabs, pinned state, per-tab nav stacks, and history to `localStorage` (`true` uses `"chemical:tabs"`). |
+| `onchange` | `(url, tab) => void` | `undefined` | Fires when any tab's URL changes. |
+| `onopen` | `({ id }) => void` | `undefined` | Fires when a tab is created or duplicated. |
+| `onclose` | `({ id }) => void` | `undefined` | Fires for each closed tab. |
+| `onreorder` | `({ id, from, to }) => void` | `undefined` | Fires when a tab moves to a new index. |
+| `onpin` | `({ id, pinned }) => void` | `undefined` | Fires when a tab is pinned or unpinned. |
+
+## `<Tabs>` Methods
+
+Bind to `<Tabs bind:this={tabs}>` to call imperative methods. Methods that accept an `id` default to the active tab.
+
+### Tab Management
+
+* `tabs.newTab(url = "", { active = true, pinned = false, focus = !url } = {})` — opens a new tab and returns its `id`.
+* `tabs.duplicate(id)` — duplicates a tab next to the source tab and selects it.
+* `tabs.select(id)` — activates a tab by `id`.
+* `tabs.close(id)` — closes a tab (keeps at least one tab open).
+* `tabs.closeOthers(id)` — closes all unpinned tabs except `id`.
+* `tabs.closeToRight(id)` — closes all unpinned tabs after `id`.
+* `tabs.pin(id)` / `tabs.unpin(id)` / `tabs.togglePin(id)` — pins or unpins a tab.
+* `tabs.reorder(from, to)` — moves a tab within its pinned or unpinned group.
+* `tabs.getTabs()` — returns the reactive tab array (`{ id, title, url, favicon, pinned }`).
+
+### Navigation & Viewport
+
+* `tabs.go(url, options)` — navigates the active tab (or pass `{ id }` in `options`).
+* `tabs.reload(id)` — reloads the tab.
+* `tabs.back(id)` / `tabs.forward(id)` — steps through the tab's isolated back/forward stack.
+* `tabs.canBack(id)` / `tabs.canForward(id)` — returns whether back or forward navigation is available.
+* `tabs.reset(id)` — resets the tab back to a blank New Tab.
+* `tabs.getTitle()` — returns the active tab's document title.
+* `tabs.fullscreen()` — requests fullscreen on the active tab's iframe.
+
+### Shared History
+
+`<Tabs>` maintains a unified visit history across all tabs (`{ id, url, title, favicon, timestamp }`, up to 500 entries, newest first):
+
+* `tabs.getHistory()` — returns the reactive history array.
+* `tabs.removeHistory(id)` — deletes a single entry by `id`.
+* `tabs.clearHistory()` — clears all history entries.
+
+## `<TabFrame>` Props
+
+`<TabFrame>` forwards `cache`, `adblock`, `plugins`, `linkhandler`, `catchlinks`, `onpointerdown`, `onkeydown`, and `onload` to each underlying `<Frame>`. By default, `window.open` and `target="_blank"` links open in a new tab unless a custom `linkhandler` is passed.

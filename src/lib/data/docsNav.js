@@ -48,6 +48,10 @@ export default [
         path: "frame",
       },
       {
+        title: "Plugins",
+        path: "plugins",
+      },
+      {
         title: "Fetch",
         path: "fetch",
       },
@@ -58,6 +62,24 @@ export default [
       {
         title: "Create Data URL",
         path: "create-data-url",
+      },
+    ],
+  },
+  {
+    title: "Tabs",
+    dir: "tabs",
+    pages: [
+      {
+        title: "Setup",
+        path: "setup",
+      },
+      {
+        title: "API",
+        path: "api",
+      },
+      {
+        title: "Styling",
+        path: "styling",
       },
     ],
   },

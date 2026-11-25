@@ -1,17 +1,20 @@
 # Create Data URL
 
-Useful for creating proxied icons for tabs.
+Fetches a remote asset through the current transport and returns it as a `data:` URL. Useful for proxied tab favicons and autocomplete images. Returns `undefined` if the request fails.
 
 ```svelte
 <script>
   import Chemical from "chemicaljs/Chemical";
 
   let chemical = $state();
+  let ready = $state(false);
 
   async function generateIcon() {
-    await chemical.createDataURL("https://www.google.com/favicon.ico");
+    if (!ready) return;
+    const icon = await chemical.createDataURL("https://www.google.com/favicon.ico");
+    console.log(icon);
   }
 </script>
 
-<Chemical bind:this={chemical} />
+<Chemical bind:ready bind:this={chemical} />
 ```

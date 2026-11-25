@@ -1,0 +1,81 @@
+# Plugins
+
+Chemical supports Scramjet plugins both globally on `<Chemical>` and per frame on `<Frame>` or `<TabFrame>`.
+
+## Global Defaults
+
+Pass `plugins` or `adblock` to `<Chemical>` to apply them to every frame automatically:
+
+```svelte
+<script>
+  import Chemical from "chemicaljs/Chemical";
+
+  let chemical = $state();
+  let ready = $state(false);
+</script>
+
+<Chemical adblock={true} bind:ready bind:this={chemical}/>
+```
+
+Setting `adblock={false}` on an individual `<Frame>` overrides the global default.
+
+## Adblock Options
+
+The `adblock` prop accepts several formats:
+
+```svelte
+<Frame adblock={true} bind:chemical bind:ready/>
+
+<Frame adblock={customRulesString} bind:chemical bind:ready/>
+
+<Frame
+  adblock={{
+    includeDefault: true,
+    extraRulesets: [myCustomRules],
+  }}
+  bind:chemical
+  bind:ready
+/>
+```
+
+You can also import `AdblockPlugin` directly from `chemicaljs/AdblockPlugin` or pass a factory function receiving `{ chemical, defaultRuleset, AdblockPlugin }`.
+
+## Custom Plugins
+
+Pass a plain plugin object (`{ name, dependencies?, install(frame, plugin) }`), a `ManagedPlugin` instance/class, or a factory function receiving `{ plugins, createPlugin, fetch, createDataURL }`.
+
+```svelte
+<script>
+  import Chemical from "chemicaljs/Chemical";
+  import Frame from "chemicaljs/Frame";
+
+  let chemical = $state();
+  let ready = $state(false);
+
+  const logNavPlugin = {
+    name: "log-nav",
+    install(frame, plugin) {
+      plugin.tap(frame.hooks.init.post, (context) => {
+        console.log("Loaded:", context.client?.url);
+      });
+    },
+  };
+</script>
+
+<Chemical bind:ready bind:this={chemical} plugins={[logNavPlugin]}/>
+<Frame bind:chemical bind:ready src="https://example.com"/>
+```
+
+You can also create managed plugin instances manually with `chemical.createPlugin({ name, dependencies, install })` after `ready` is `true`.
+
+## Built-in Plugin Exports
+
+Once `ready` is `true`, `chemical.plugins` exposes:
+
+* `ManagedPlugin`
+* `HttpCachePlugin`
+* `UrlWatcherPlugin`
+* `CatchEscapedLinksPlugin`
+* `EventHandlerPlugin`
+* `LinkHandlerPlugin`
+* `AdblockPlugin`

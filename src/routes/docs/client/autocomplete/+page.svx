@@ -1,57 +1,118 @@
 # Autocomplete
 
-Get search suggestions through the current transport.
+Get search suggestions and math evaluations through the current transport, or drop in the `<Autocomplete>` component.
+
+## Method Usage
 
 ```svelte
 <script>
   import Chemical from "chemicaljs/Chemical";
 
   let chemical = $state();
+  let ready = $state(false);
 
   async function getSuggestions() {
-    await chemical.autocomplete("math"))
+    if (!ready) return;
+    const results = await chemical.autocomplete("math");
+    console.log(results);
   }
 </script>
 
-<Chemical
-  bind:this={chemical}
+<Chemical bind:ready bind:this={chemical}/>
+```
+
+## Response Format
+
+Results are returned as an array of objects with `math`, `plain`, and `rich` entries:
+
+```json
+[
+  {
+    "type": "math",
+    "data": {
+      "equation": "1+1",
+      "result": "2"
+    }
+  },
+  {
+    "type": "plain",
+    "data": [
+      { "text": "g", "highlight": false },
+      { "text": "mail", "highlight": true }
+    ],
+    "fullURL": "gmail"
+  },
+  {
+    "type": "rich",
+    "data": {
+      "title": "Google",
+      "description": "Search the world's information.",
+      "image": "data:image/png;base64,..."
+    }
+  }
+]
+```
+
+## Autocomplete Component
+
+Import `<Autocomplete>` from `chemicaljs/Autocomplete` for standalone use, or from `chemicaljs/tabs` to automatically bind to `<Tabs>` and `<AddressBar>`.
+
+```svelte
+<script>
+  import Chemical from "chemicaljs/Chemical";
+  import Autocomplete from "chemicaljs/Autocomplete";
+
+  let chemical = $state();
+  let ready = $state(false);
+  let ac = $state();
+  let query = $state("");
+  let open = $state(false);
+</script>
+
+<Chemical bind:ready bind:this={chemical}/>
+
+<input
+  bind:value={query}
+  onfocus={() => (open = true)}
+  onblur={() => (open = false)}
+  onkeydown={(e) => ac?.handleKeydown(e)}
+/>
+
+<Autocomplete bind:this={ac} onselect="{(val)" {chemical} {open} {query} {ready}> {
+    query = val;
+    open = false;
+  }}
 />
 ```
 
-## Parsing Data
+### Props
 
-Results are return in json format with `plain` and `rich` results from Google and `math` for math results.
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `chemical` | `object` | Tabs context | `Chemical` component instance. |
+| `ready` | `boolean` | `true` / Tabs context | Prevents requests before Chemical is ready. |
+| `search` | `(query) => Promise<any[]>` | `undefined` | Custom async suggestion provider. |
+| `query` | `string` | Tabs context | Current search text. Omit inside `<Tabs>` to auto-bind. |
+| `open` | `boolean` | `true` / Tabs context | Controls dropdown visibility. |
+| `debounce` | `number` | `150` | Debounce delay in milliseconds. |
+| `limit` | `number` | `8` | Maximum number of suggestions shown (`0` for unlimited). |
+| `getValue` | `(entry) => string` | Built-in extractor | Maps a suggestion entry to its string value. |
+| `onselect` | `(value, entry) => void` | `undefined` | Fires when a suggestion is selected. |
+| `onhighlight` | `(value, entry, index) => void` | `undefined` | Fires when arrow navigation changes the active option. |
+| `item` | `Snippet` | Built-in renderer | Custom option template receiving `{ item, value, active, index, select }`. |
 
-```js
-[
-    {
-        "type": "math",
-        "data": {
-            "equation": "1+1",
-            "result": "2",
-        }
-    },
-    {
-        "type": "plain",
-        "data": [
-            {
-                "text": "g",
-                "highlight": false
-            },
-            {
-                "text": "mail",
-                "highlight": true
-            }
-        ],
-        "fullURL": "gmail"
-    },
-    {
-        "type": "rich",
-        "data": {
-            "title": "Google",
-            "description: "Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking for.", //Optional
-            "image": "data:image/png;base64" //Optional
-        }
-    },
-]
-```
+### Methods
+
+* `ac.isOpen()` — returns whether the listbox is currently visible.
+* `ac.move(delta)` — moves highlight by `1` or `-1`.
+* `ac.select(index)` / `ac.selectActive()` — selects an item.
+* `ac.close()` — dismisses the dropdown.
+* `ac.handleKeydown(e)` — handles `ArrowDown`, `ArrowUp`, `Enter`, and `Escape`; returns `true` if handled.
+
+### Styling Hooks
+
+* `li[data-active]` — currently highlighted option.
+* `li[data-type="math" | "rich" | "plain"]` — suggestion type.
+* `[data-ac-equation]`, `[data-ac-result]` — math result elements.
+* `[data-ac-image]`, `[data-ac-text]`, `[data-ac-title]`, `[data-ac-description]` — rich result elements.
+* `[data-ac-plain]` — plain text suggestion wrapper.

@@ -8,7 +8,6 @@ html {
 code:not(pre code) {
   padding: 0.2em 0.4em;
   border-radius: 6px;
-  font-weight: 600;
   font-size: 0.875em;
   background: var(--color-slate-800);
   font-weight: normal;

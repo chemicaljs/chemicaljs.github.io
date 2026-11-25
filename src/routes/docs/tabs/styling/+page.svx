@@ -1,0 +1,52 @@
+# Tabs Styling & Layout
+
+Tab components ship with minimal structural CSS so you can style them with regular CSS or Tailwind while keeping built-in layout, drag reordering, animations, and responsive shrinking.
+
+## Orientation
+
+Switch `<TabBar>` between horizontal and vertical layouts with the `orientation` prop (`"horizontal"` by default):
+
+```svelte
+<TabBar class="tab-bar" orientation="vertical">
+  <Tab class="tab">
+    <TabFavicon class="favicon">🌐</TabFavicon>
+    <TabTitle class="title"/>
+    <TabClose class="close">✕</TabClose>
+  </Tab>
+  <NewTab class="new-tab">+</NewTab>
+</TabBar>
+```
+
+* **Horizontal mode:** Tabs sit in a single scrollable flex strip. Pinned tabs shrink to compact icon-only tiles on the left and wheel scrolling scrolls horizontally.
+* **Vertical mode:** Pinned tabs render in a responsive grid at the top of the sidebar (`repeat(auto-fit, minmax(1.875rem, 1fr))`) that stretches across a single row when few tabs are pinned and wraps into square icon tiles as more are added. Unpinned tabs stack in a scrollable list below.
+
+## Interactions
+
+* **Drag reordering:** Drag unpinned tabs along the main axis or drag pinned tiles in 2D inside the vertical grid.
+* **Middle-click:** Closes the clicked tab.
+* **Keyboard navigation:** Supports arrow keys (`ArrowLeft`/`ArrowRight` in horizontal mode, `ArrowUp`/`ArrowDown` in vertical mode, plus `ArrowLeft`/`ArrowRight` across vertical pinned tiles), `Home`, `End`, `Enter`, and `Space`.
+* **Compact tabs:** Container queries automatically hide inactive close buttons on narrow horizontal tabs and swap the icon for the close button on hover when very narrow.
+
+## Data Attributes
+
+Use these selectors to style states without fighting component specificity:
+
+| Selector | Element | Description |
+| --- | --- | --- |
+| `[data-orientation="horizontal" \| "vertical"]` | `TabBar` | Active tab bar orientation. |
+| `[data-active]` | `Tab` | Currently selected tab. |
+| `[data-pinned]` | `Tab` | Pinned tab (title and close button are hidden automatically). |
+| `[data-dragging]` | `Tab` | Tab currently being dragged. |
+| `[data-tab-title]` | `TabTitle` | Tab title text element. |
+| `[data-tab-close]` | `TabClose` | Tab close button element. |
+| `[data-tab-pinned]` | Internal grid | Pinned tab container (override `grid-template-columns` to customize vertical grid sizing). |
+| `[data-tab-track]` | Internal list | Scrollable unpinned tab container in vertical mode. |
+
+
+## Styling Example
+
+```css
+.tab-bar[data-orientation="vertical"] .tab[data-pinned] {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+```

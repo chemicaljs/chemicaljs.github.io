@@ -1,6 +1,6 @@
 # Wisp
 
-Change the wisp URL to something other then the built in server.
+Change the Wisp URL to something other than the built-in server. Defaults to `ws://` or `wss://` on the current host at `/wisp/`.
 
 ```svelte
 <script>
@@ -9,5 +9,5 @@ Change the wisp URL to something other then the built in server.
   let wisp = $state("wss://example.com/wisp/");
 </script>
 
-<Chemical bind:wisp />
+<Chemical bind:wisp/>
 ```

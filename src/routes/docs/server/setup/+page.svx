@@ -1,23 +1,35 @@
 # Server Setup
 
-The server serves Scramjet files and create default a wisp server.
+The server serves Scramjet files, `/sw.js`, your static frontend build, and a default Wisp server.
 
 ## Installation
 
-Using NPM, install the `chemicaljs` package.
+Install the `chemicaljs` package:
 
-# Usage
+```bash
+npm install chemicaljs
+```
 
-First import `ChemicalServer` and create a new server. This server is built on top of express.
+## Usage
+
+Import `Chemical` and create a new server instance. The server is built on top of Express.
 
 ```js
 import { Chemical } from "chemicaljs";
 
 const server = new Chemical({
-  port: 8000, //The port the server runs on
-  staticDir: "build", //Serve static svelte assets
-  spaMode: false, //Serve "index.html" on all unknown routes
+  port: 8000,
+  staticDir: "build",
+  spaMode: false,
 });
 
 await server.start();
 ```
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `port` | `number` | `8000` | Port the HTTP and Wisp server listens on. |
+| `staticDir` | `string` | `"build"` | Directory containing your built frontend files. |
+| `spaMode` | `boolean` | `false` | Serves `index.html` on unmatched `GET` routes. |
+
+Call `server.stop()` to shut down the server.

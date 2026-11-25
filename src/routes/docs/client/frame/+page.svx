@@ -1,6 +1,6 @@
 # Frame
 
-The client Frame component creates an iFrame and uses `controller.createFrame` which allows for plugin access.
+The `Frame` component creates a proxied `<iframe>` using `chemical.createFrame`, with isolated per-frame back/forward history, `window.open` containment, title and favicon tracking, and plugin support.
 
 ## Installation
 
@@ -13,46 +13,42 @@ The client Frame component creates an iFrame and uses `controller.createFrame` w
   let chemical = $state();
 </script>
 
-<Chemical bind:this={chemical} />
-<Frame bind:ready bind:chemical src="https://www.example.com" />
+<Chemical bind:ready bind:this={chemical}/>
+<Frame bind:chemical bind:ready src="https://example.com"/>
 ```
 
-## Go
+## Navigation
+
+Navigate programmatically with `frame.go()`, or pass `autoHttps` and `searchEngine` as props or per-call options.
+
 ```svelte
 <script>
   import Chemical from "chemicaljs/Chemical";
   import Frame from "chemicaljs/Frame";
+  import searchEngines from "chemicaljs/searchEngines";
 
   let ready = $state(false);
   let chemical = $state();
   let frame = $state();
 
-  function goToURL() {
-    frame.go("https://example.com")
+  function goToURL(input) {
+    frame.go(input, {
+      autoHttps: true,
+      searchEngine: searchEngines.google,
+    });
   }
 </script>
 
-<Chemical bind:this={chemical} />
-<Frame bind:this={frame} bind:ready bind:chemical src="https://www.example.com" />
+<Chemical bind:ready bind:this={chemical}/>
+<Frame autoHttps bind:chemical bind:ready bind:this={frame} searchEngine={searchEngines.google} src="https://example.com"/>
 ```
 
-`[frame state].go()` also accepts options
+* `autoHttps` prepends `https://` when the input contains a `.` and no spaces.
+* `searchEngine` is a search URL template with `%s` as the query placeholder.
+
+Built-in search engines from `chemicaljs/searchEngines`:
 
 ```js
-import searchEngines from "chemicaljs/searchEngines";
-
-frame.go("https://example.com", {
-  autoHttps: true, //Default false
-  searchEngine: searchEngines.google, //Default blank
-})
-```
-
-`autoHttps` adds `https://` if it is not included in the URL and it will become a valid URL
-
-`searchEngine` is the search engine URL with `%s` in place of query
-
-Built in search search engines
-```bash
 searchEngines.google
 searchEngines.duckduckgo
 searchEngines.bing
@@ -62,7 +58,7 @@ searchEngines.yahoo
 
 ## Controls
 
-Emulate browser controls for the Frame
+`Frame` maintains its own navigation stack so `back()` and `forward()` never modify the host page's `window.history`. Use `canBack()` and `canForward()` to disable buttons reactively.
 
 ```svelte
 <script>
@@ -74,50 +70,66 @@ Emulate browser controls for the Frame
   let frame = $state();
 </script>
 
-<Chemical bind:this={chemical} />
+<Chemical bind:ready bind:this={chemical}/>
+<button onclick={() => frame.back()} disabled={!frame?.canBack()}>Back</button>
+<button onclick={() => frame.forward()} disabled={!frame?.canForward()}>
+  Forward
+</button>
 <button onclick={() => frame.reload()}>Reload</button>
-<button onclick={() => frame.forward()}>Forward</button>
-<button onclick={() => frame.back()}>Back</button>
-<Frame bind:this={frame} bind:ready bind:chemical src="https://www.example.com" />
+<Frame bind:chemical bind:ready bind:this={frame} src="https://example.com"/>
 ```
 
-## Plugins
+## History
 
-Choose from built in Scramjet plugins
+Standalone frames track visited pages (up to 500 entries, newest first) with `{ id, url, title, favicon, timestamp }`. Pass `persist` to save history to `localStorage` (`true` uses `"chemical:history"`, or pass a custom key string).
 
 ```svelte
-<Frame
-  adblock={true}
-  catchlinks={(url) =>
+<Frame bind:chemical bind:ready bind:this={frame} persist src="https://example.com"/>
+```
+
+* `frame.getHistory()` — returns the reactive array of history entries.
+* `frame.removeHistory(id)` — removes a single entry by `id`.
+* `frame.clearHistory()` — clears all entries.
+* `frame.getNavState()` — returns `{ history, index }` for the current back/forward stack.
+* Set `trackHistory={false}` to disable visit logging on a frame.
+
+## Plugins & Popups
+
+`Frame` automatically patches `window.open` inside proxied pages so popups route to `linkhandler` (or stay inside the frame if no `linkhandler` is provided) instead of opening a new browser window.
+
+```svelte
+<Frame adblock={true} catchlinks={(url) =>
     new URL(`/?goto=${encodeURIComponent(url.href)}`, location.origin)}
-  linkhandler={(url) => window.open("?url=" + encodeURIComponent(url))}
+  linkhandler={(url) => console.log("Popup or _blank link:", url)}
   cache={false}
-  onchange={(url) => console.log("Frame URL changed to: " + url)}
+  onchange={(url, { fromHistory }) => console.log("URL changed:", url, fromHistory)}
+  ontitle={(title) => console.log("Title:", title)}
+  onfavicon={(icon) => console.log("Favicon data URL:", icon)}
   bind:ready
   bind:chemical
-  src="https://www.example.com"
+  src="https://example.com"
 />
 ```
 
+See [Plugins](/docs/client/plugins/) for custom plugins and advanced `adblock` options.
+
 ## Events
 
-Listen for pointer, keyboard, and load events inside the Frame
+Listen for pointer, keyboard, and load events inside the iframe:
 
 ```svelte
-<Frame
-  onpointerdown={(e) => console.log("Pointer down inside frame")}
+<Frame onpointerdown={(e) => console.log("Pointer down inside frame")}
   onkeydown={(e) => console.log("Key pressed inside frame: " + e.key)}
   onload={(e) => console.log("Frame finished loading")}
   bind:ready
   bind:chemical
-  src="https://www.example.com"
+  src="https://example.com"
 />
 ```
 
 ## Helper Functions
 
-Fullscreen the frame with `frame.fullscreen()`
-
-Get the current frame document title using `frame.getTitle()`
-
-Reset the frame with `frame.reset()`
+* `frame.fullscreen()` — requests fullscreen on the iframe.
+* `frame.getTitle()` — returns the current document title.
+* `frame.getFavicon()` — returns the current favicon data URL.
+* `frame.reset()` — clears the iframe, URL, and back/forward stack.

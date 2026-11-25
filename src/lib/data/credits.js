@@ -23,4 +23,11 @@ export default [
     website: "https://expressjs.com/",
     github: "https://github.com/expressjs/express",
   },
+  {
+    title: "mathjs",
+    description:
+      "An extensive math library for JavaScript and Node.js used for autocomplete calculations.",
+    website: "https://mathjs.org/",
+    github: "https://github.com/josdejong/mathjs",
+  },
 ];

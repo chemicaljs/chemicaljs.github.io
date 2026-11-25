@@ -1,0 +1,67 @@
+# Tabs Setup
+
+`chemicaljs/tabs` provides headless, composable Svelte 5 components for building a multi-tabbed browser UI with drag reordering, pinned tabs, horizontal and vertical layouts, autocomplete, and optional `localStorage` persistence.
+
+## Components
+
+All components are exported from `chemicaljs/tabs`:
+
+* `Tabs` — root state provider and context.
+* `TabBar` — tablist container supporting `horizontal` and `vertical` orientations.
+* `Tab` — renders all tabs with drag reordering, animations, keyboard navigation, and middle-click close.
+* `TabFavicon` — renders the tab's favicon with fallback content.
+* `TabTitle` — renders the tab's title with edge fade overflow.
+* `TabClose` — closes the tab (hidden automatically on pinned tabs).
+* `NewTab` — button that opens a new tab and focuses `<AddressBar>`.
+* `AddressBar` — URL and search input wired to the active tab and `<Autocomplete>`.
+* `Autocomplete` — suggestion dropdown that automatically connects to `<AddressBar>`.
+* `TabFrame` — renders isolated `<Frame>` panels for each tab and routes popups/`_blank` links into new tabs.
+
+## Example
+
+```svelte
+<script>
+  import Chemical from "chemicaljs/Chemical";
+  import {
+    AddressBar,
+    Autocomplete,
+    NewTab,
+    Tab,
+    TabBar,
+    TabClose,
+    TabFavicon,
+    TabFrame,
+    Tabs,
+    TabTitle,
+  } from "chemicaljs/tabs";
+
+  let chemical = $state();
+  let ready = $state(false);
+  let tabs = $state();
+</script>
+
+<Chemical bind:ready bind:this={chemical}/>
+
+<Tabs bind:this={tabs} persist {chemical} {ready}>
+  <TabBar class="tab-bar">
+    <Tab class="tab">
+      <TabFavicon class="favicon">🌐</TabFavicon>
+      <TabTitle class="title"/>
+      <TabClose class="close">✕</TabClose>
+    </Tab>
+    <NewTab class="new-tab">+</NewTab>
+  </TabBar>
+
+  <div class="toolbar">
+    <button onclick={() => tabs.back()} disabled={!tabs?.canBack()}>‹</button>
+    <button onclick={() => tabs.forward()} disabled={!tabs?.canForward()}>
+      ›
+    </button>
+    <button onclick={() => tabs.reload()}>↻</button>
+    <AddressBar class="address" placeholder="Search or enter URL"/>
+    <Autocomplete class="suggestions"/>
+  </div>
+
+  <TabFrame class="viewport"/>
+</Tabs>
+```

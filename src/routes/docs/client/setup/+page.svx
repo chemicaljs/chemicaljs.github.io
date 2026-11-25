@@ -1,6 +1,6 @@
 # Client Setup
 
-The client Svelte component sets up the service worker, transports, core Chemical functions.
+The `Chemical` component sets up the service worker, transports, and core Chemical functions.
 
 ## Installation
 
@@ -9,14 +9,15 @@ The client Svelte component sets up the service worker, transports, core Chemica
   import Chemical from "chemicaljs/Chemical";
 </script>
 
-<Chemical />
+<Chemical/>
 ```
 
 ## Using in layout
 
-The most common way to use Chemical is adding it to your main layout file so it runs on every page. Use `setContext` to access ready state and chemical functions in other pages.
+Add `<Chemical>` to your root layout so it runs across your app, and share its state through `setContext`.
 
-+layout.svelte
+`+layout.svelte`
+
 ```svelte
 <script>
   import Chemical from "chemicaljs/Chemical";
@@ -32,11 +33,12 @@ The most common way to use Chemical is adding it to your main layout file so it 
   setContext("chemState", chemState);
 </script>
 
-<Chemical bind:this={chemState.instance} bind:ready={chemState.ready} />
+<Chemical bind:ready={chemState.ready} bind:this={chemState.instance}/>
 {@render children()}
 ```
 
-+page.svelte
+`+page.svelte`
+
 ```svelte
 <script>
   import Frame from "chemicaljs/Frame";
@@ -45,9 +47,7 @@ The most common way to use Chemical is adding it to your main layout file so it 
   let chemState = getContext("chemState");
 </script>
 
-<Frame
-  src="https://www.example.com"
-  bind:ready={chemState.ready}
-  bind:chemical={chemState.instance}
-></Frame>
+<Frame bind:chemical={chemState.instance} bind:ready={chemState.ready} src="https://example.com"/>
 ```
+
+You can also configure global `plugins` and `adblock` defaults on `<Chemical>` so every `<Frame>` inherits them. See [Plugins](/docs/client/plugins/).

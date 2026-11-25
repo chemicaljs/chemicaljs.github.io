@@ -11,7 +11,7 @@
 <div class="flex flex-col gap-8 items-center my-8">
   <div class="flex items-center flex-col gap-2">
     <h2 class="font-bold text-2xl">Credits</h2>
-    <p>These project power Chemical to create the ultimate proxy experience</p>
+    <p>These projects power Chemical to create the ultimate proxy experience</p>
   </div>
   <div class="grid grid-cols-4 gap-4 mx-4">
     {#each credits as credit}

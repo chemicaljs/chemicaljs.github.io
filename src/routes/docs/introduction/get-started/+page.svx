@@ -19,8 +19,8 @@
   </div>
 </div>
 
-Chemical is a package that takes care of setting up a proxy with Scramjet both the backend and with a Svelte frontend.
+Chemical is a package that takes care of setting up a Scramjet proxy on both the backend and a Svelte 5 frontend.
 
-This can be great for people with less experience looking to create a proxy site, or just to have a clean, simple codebase.
+It provides a Node server, a Vite development plugin, a core client component, an isolated `<Frame>` with plugin and history support, an `<Autocomplete>` component, and a full composable tab system.
 
-To setup Chemical, create a server to serve Scramjet files and create default a wisp server.
+To set up Chemical, start with the [Server Setup](/docs/server/setup/) to serve Scramjet assets and create a default Wisp server, then follow [Client Setup](/docs/client/setup/).
